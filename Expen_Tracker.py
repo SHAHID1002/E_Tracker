@@ -1,34 +1,34 @@
 import os
 from datetime import datetime
 
-# File to store expenses
+
 FILENAME = 'expenses.txt'
 
-# Check if file exists, create it with a header if it doesn’t
+
 if not os.path.exists(FILENAME):
     with open(FILENAME, 'w') as file:
         file.write("Date,Description,Amount\n")
 
-# Function to add an expense
+
 def add_expense():
     description = input("Enter expense description: ").strip()
     amount = input("Enter amount: ").strip()
     
-    # Validate amount as a number
+
     try:
         amount = float(amount)
     except ValueError:
         print("Invalid amount. Please enter a valid number.")
         return
 
-    # Get current date and time
+
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
     with open(FILENAME, 'a') as file:
         file.write(f"{current_time},{description},{amount}\n")
     print("Expense added successfully!\n")
 
-# Function to view all expenses
+
 def view_expenses():
     print("\n--- All Expenses ---")
     with open(FILENAME, 'r') as file:
@@ -46,7 +46,6 @@ def view_expenses():
             print(f"{index}\t{date}\t{description}\tRs:{float(amount):.2f}")
     print()
 
-# Function to calculate total expenses
 def calculate_total():
     with open(FILENAME, 'r') as file:
         lines = file.readlines()
@@ -62,7 +61,7 @@ def calculate_total():
 
     print(f"\nTotal Expenses: Rs:{total:.2f}\n")
 
-# Function to search for expenses by description
+
 def search_expense():
     keyword = input("Enter keyword to search: ").strip().lower()
 
@@ -88,7 +87,7 @@ def search_expense():
             print("No matching expenses found.")
     print()
 
-# Function to delete an expense by its number
+
 def delete_expense():
     view_expenses()
     try:
@@ -121,9 +120,8 @@ def display_menu():
     print("5. Delete an Expense")
     print("6. Exit")
 
-# Main function to run the program with for loop
 def main():
-    for _ in iter(int, 1):  # Infinite loop using a for loop
+    for _ in iter(int, 1): 
         display_menu()
         choice = input("Choose an option (1-6): ").strip()
         
